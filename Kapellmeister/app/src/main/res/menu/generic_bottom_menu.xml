@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/generic_menu_main_page"
+        android:icon="@drawable/home"
+        android:title="@string/menu_main_page"
+        android:orderInCategory="1"></item>
+
+    <item android:id="@+id/generic_menu_settings_page"
+        android:icon="@drawable/settings"
+        android:title="@string/menu_settings_page"
+        android:orderInCategory="2"></item>
+
+    <item android:id="@+id/generic_menu_library_music_page"
+        android:icon="@drawable/library_music"
+        android:title="@string/menu_library_music_page"
+        android:orderInCategory="3"></item>
+</menu>

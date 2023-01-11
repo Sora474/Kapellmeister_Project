@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Kapellmeister</string>
+    <string name="menu_main_page">Основная страница</string>
+    <string name="menu_settings_page">Настройки</string>
+    <string name="menu_library_music_page">Коллекции</string>
 </resources>
