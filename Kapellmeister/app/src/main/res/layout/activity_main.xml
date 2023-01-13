@@ -10,7 +10,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_generic"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:onClick="bnv_generic_Click"
         app:backgroundTint="@color/ChapmanRed"
         app:itemIconTint="@drawable/generic_bottom_menu_selector"
@@ -19,5 +19,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/generic_bottom_menu" />
+
+    <FrameLayout
+        android:id="@+id/fl_generic"
+        android:layout_width="409dp"
+        android:layout_height="669dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

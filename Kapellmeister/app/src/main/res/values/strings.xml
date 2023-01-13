@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Kapellmeister</string>
-    <string name="menu_main_page">Main Page</string>
-    <string name="menu_settings_page">Settings Page</string>
+    <string name="menu_list_page">Play List</string>
+    <string name="menu_author_page">Authors</string>
     <string name="menu_library_music_page">Library Music</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
