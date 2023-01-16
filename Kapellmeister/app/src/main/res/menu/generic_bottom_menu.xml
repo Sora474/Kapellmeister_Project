@@ -10,8 +10,8 @@
         android:title="@string/menu_author_page"
         android:orderInCategory="2"></item>
 
-    <item android:id="@+id/generic_menu_library_music_page"
-        android:icon="@drawable/ic_library_music"
-        android:title="@string/menu_library_music_page"
+    <item android:id="@+id/generic_menu_favorite_page"
+        android:icon="@drawable/ic_favorite_false"
+        android:title="@string/menu_favorite_page"
         android:orderInCategory="3"></item>
 </menu>

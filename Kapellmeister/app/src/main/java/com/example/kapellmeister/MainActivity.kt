@@ -18,9 +18,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Kapellmeister)
         setContentView(BindingClass.root)
 
-        BindingClass.bnvGeneric.selectedItemId = R.id.generic_menu_list_page // Флаг меню по дефолту
-
-        BindingClass.bnvGeneric.setOnItemSelectedListener {
+        BindingClass.bnvGeneric.setOnItemSelectedListener /*Подгрузга страниц в Frame*/ {
             when(it.itemId){
                 R.id.generic_menu_list_page          -> {
                     supportFragmentManager
@@ -32,34 +30,15 @@ class MainActivity : AppCompatActivity() {
                         .beginTransaction().replace(R.id.fl_generic, AuthorPage())
                         .commit()
                 }
-                R.id.generic_menu_library_music_page -> {
+                R.id.generic_menu_favorite_page -> {
                     supportFragmentManager
                         .beginTransaction().replace(R.id.fl_generic, LibraryMusicPage())
                         .commit()
                 }
             }
+
             true
         }
-    }
-
-    ///////////////// Не Menu
-
-    fun bnv_generic_Click (menu: Menu){ // Подгрузга страниц в Frame
-        BindingClass.bnvGeneric.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.generic_menu_list_page          -> {
-                    supportFragmentManager
-                        .beginTransaction().replace(R.id.fl_generic, ListPage())
-                        .commit()
-                }
-                R.id.generic_menu_author_page        -> {
-                    Toast.makeText(this,"2",Toast.LENGTH_SHORT).show()
-                }
-                R.id.generic_menu_library_music_page -> {
-                    Toast.makeText(this,"3",Toast.LENGTH_SHORT).show()
-                }
-            }
-            true
-        }
+        BindingClass.bnvGeneric.selectedItemId = R.id.generic_menu_list_page // Флаг меню по дефолту
     }
 }
