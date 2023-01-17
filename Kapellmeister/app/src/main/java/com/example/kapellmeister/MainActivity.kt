@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import com.example.kapellmeister.Pages.AuthorPage
-import com.example.kapellmeister.Pages.LibraryMusicPage
+import com.example.kapellmeister.Pages.FavoritePage
 import com.example.kapellmeister.Pages.ListPage
 import com.example.kapellmeister.databinding.ActivityMainBinding
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.generic_menu_favorite_page -> {
                     supportFragmentManager
-                        .beginTransaction().replace(R.id.fl_generic, LibraryMusicPage())
+                        .beginTransaction().replace(R.id.fl_generic, FavoritePage())
                         .commit()
                 }
             }

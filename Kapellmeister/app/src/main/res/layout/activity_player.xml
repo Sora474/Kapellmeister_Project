@@ -7,41 +7,28 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".PlayerActivity">
+    tools:context=".PlayerActivity"
+    android:layout_weight="1">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/white"
-            app:srcCompat="@drawable/ic_arrow_down" />
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_arrow_down"/>
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -76,9 +63,9 @@
     <TextView
         android:id="@+id/tv_song_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:gravity="center"
         android:text="@string/song_name"
-        android:textAlignment="center"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -86,14 +73,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_arrow_left"
             app:iconSize="30dp"
-            android:backgroundTint="@color/ChapmanRed"
+            android:backgroundTint="@android:color/transparent"
             app:iconTint="@color/white"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -103,7 +91,7 @@
             app:icon="@drawable/ic_play"
             app:iconSize="40dp"
             app:shapeAppearanceOverlay="@style/curved"
-            android:backgroundTint="@color/ChapmanRed"
+            android:backgroundTint="@android:color/transparent"
             app:iconTint="@color/white"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -111,7 +99,7 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_arrow_right"
             app:iconSize="30dp"
-            android:backgroundTint="@color/ChapmanRed"
+            android:backgroundTint="@android:color/transparent"
             app:iconTint="@color/white"/>
 
     </LinearLayout>
@@ -120,7 +108,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_weight="1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/textView11"
@@ -134,7 +124,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:thumbTint="@color/ChapmanRed"
-            android:progressTint="@color/Complementarny"
+            android:progressTint="@color/white"
             android:progressBackgroundTint="@color/Coffee_foam"/>
 
         <TextView
@@ -143,6 +133,54 @@
             android:layout_height="match_parent"
             android:text="@string/end_seek_bar"
             android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="10dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_shuffle" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="10dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_equalizer" />
+
+        <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="10dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:backgroundTint="@android:color/transparent"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/ic_favorite_false" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="10dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_repeat"/>
 
     </LinearLayout>
 </LinearLayout>
