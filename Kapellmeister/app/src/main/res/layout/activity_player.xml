@@ -7,47 +7,27 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".PlayerActivity"
-    android:layout_weight="1">
+    tools:context=".PlayerActivity">
 
-
+    <!-- HeadLine -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="10dp"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
-            app:srcCompat="@drawable/ic_arrow_down"/>
+            app:srcCompat="@drawable/ic_arrow_down"
+            app:tint="@color/white" />
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:text="@string/albom_name"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -60,28 +40,98 @@
         app:shapeAppearanceOverlay="@style/curved"
         app:strokeWidth="5dp"/>
 
-    <TextView
-        android:id="@+id/tv_song_name"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="@string/song_name"
-        android:textSize="18sp" />
-
+    <!-- InfLine -->
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/song_name"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                app:srcCompat="@drawable/ic_favorite_false"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:text="@string/author_name"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!-- ProgressLine -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/start_seek_bar"
+            android:textColor="@color/Gray"
+            android:textSize="15sp" />
+
+        <SeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:thumbTint="@color/white"
+            android:progressTint="@color/white"
+            android:progressBackgroundTint="@color/Gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/end_seek_bar"
+            android:textColor="@color/Gray"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- FunkLine -->
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/Gray"
+            app:srcCompat="@drawable/ic_shuffle" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             app:icon="@drawable/ic_arrow_left"
             app:iconSize="30dp"
-            android:backgroundTint="@android:color/transparent"
             app:iconTint="@color/white"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -102,85 +152,14 @@
             android:backgroundTint="@android:color/transparent"
             app:iconTint="@color/white"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:id="@+id/textView11"
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/start_seek_bar"
-            android:textSize="15sp" />
-
-        <SeekBar
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:thumbTint="@color/ChapmanRed"
-            android:progressTint="@color/white"
-            android:progressBackgroundTint="@color/Coffee_foam"/>
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/end_seek_bar"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="10dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
-            app:srcCompat="@drawable/ic_shuffle" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="10dp"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
-            app:srcCompat="@drawable/ic_equalizer" />
-
-        <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="10dp"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:layout_weight="1"
-        android:backgroundTint="@android:color/transparent"
-        app:tint="@color/white"
-        app:srcCompat="@drawable/ic_favorite_false" />
-
-        <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="10dp"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
+            app:tint="@color/Gray"
             app:srcCompat="@drawable/ic_repeat"/>
 
     </LinearLayout>
+
 </LinearLayout>
