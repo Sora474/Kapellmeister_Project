@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/generic_bottom_menu_list_page"
+    <item android:id="@+id/generic_left_menu_list_page"
         android:icon="@drawable/ic_list"
         android:title="@string/menu_list_page"
         android:orderInCategory="1"/>
 
-    <item android:id="@+id/generic_bottom_menu_author_page"
+    <item android:id="@+id/generic_left_menu_author_page"
         android:icon="@drawable/ic_author"
         android:title="@string/menu_author_page"
         android:orderInCategory="2"/>
 
-    <item android:id="@+id/generic_bottom_menu_favorite_page"
+    <item android:id="@+id/generic_left_menu_favorite_page"
         android:icon="@drawable/ic_collection"
         android:title="@string/menu_favorite_page"
         android:orderInCategory="3"/>

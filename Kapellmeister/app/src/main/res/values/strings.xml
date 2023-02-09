@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name" translatable="false">Kapellmeister</string>
+
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="open" translatable="false">Open</string>
+    <string name="close" translatable="false">Close</string>
+    <string name="time_zero" translatable="false">00:00</string>
+
     <string name="menu_list_page">List</string>
     <string name="menu_author_page">Authors</string>
     <string name="menu_favorite_page">Favorite</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="total_songs">Total Songs:</string>
-    <string name="song_name">Song Name</string>
-    <string name="start_seek_bar" translatable="false">00:00</string>
-    <string name="end_seek_bar" translatable="false">00:00</string>
+
+    <string name="total_sound">Total Songs:</string>
+    <string name="sound_name">Sound Name</string>
     <string name="albom_name">Albom Name</string>
     <string name="author_name">Author Name</string>
+
 </resources>

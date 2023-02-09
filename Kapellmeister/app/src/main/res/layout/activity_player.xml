@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@color/ChapmanRed"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".PlayerActivity">
@@ -16,11 +17,13 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/btn_down"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/ic_arrow_down"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="Вниз"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +41,7 @@
         android:layout_margin="10dp"
         android:src="@drawable/ic_image_png"
         app:shapeAppearanceOverlay="@style/curved"
-        app:strokeWidth="5dp"/>
+        app:strokeWidth="5dp" />
 
     <!-- InfLine -->
     <LinearLayout
@@ -56,7 +59,7 @@
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/song_name"
+                android:text="@string/sound_name"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -72,7 +75,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:text="@string/author_name"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -83,28 +86,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/start_seek_bar"
+            android:text="@string/time_zero"
             android:textColor="@color/Gray"
             android:textSize="15sp" />
 
         <SeekBar
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:thumbTint="@color/white"
+            android:progressBackgroundTint="@color/Gray"
             android:progressTint="@color/white"
-            android:progressBackgroundTint="@color/Gray"/>
+            android:thumbTint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/end_seek_bar"
+            android:text="@string/time_zero"
             android:textColor="@color/Gray"
             android:textSize="15sp" />
 
@@ -123,8 +126,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@color/Gray"
-            app:srcCompat="@drawable/ic_shuffle" />
+            app:srcCompat="@drawable/ic_shuffle"
+            app:tint="@color/Gray" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
@@ -132,33 +135,33 @@
             android:backgroundTint="@android:color/transparent"
             app:icon="@drawable/ic_arrow_left"
             app:iconSize="30dp"
-            app:iconTint="@color/white"/>
+            app:iconTint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@android:color/transparent"
             app:icon="@drawable/ic_play"
             app:iconSize="40dp"
-            app:shapeAppearanceOverlay="@style/curved"
-            android:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/white"/>
+            app:iconTint="@color/white"
+            app:shapeAppearanceOverlay="@style/curved" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             app:icon="@drawable/ic_arrow_right"
             app:iconSize="30dp"
-            android:backgroundTint="@android:color/transparent"
-            app:iconTint="@color/white"/>
+            app:iconTint="@color/white" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@color/Gray"
-            app:srcCompat="@drawable/ic_repeat"/>
+            app:srcCompat="@drawable/ic_repeat"
+            app:tint="@color/Gray" />
 
     </LinearLayout>
 

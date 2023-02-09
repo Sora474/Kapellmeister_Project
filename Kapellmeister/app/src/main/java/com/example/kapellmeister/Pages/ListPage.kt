@@ -5,56 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kapellmeister.Adapters.SoundAdapter
 import com.example.kapellmeister.R
+import com.example.kapellmeister.databinding.FragmentListPageBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ListPage.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ListPage : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class ListPage : Fragment(R.layout.fragment_list_page) {
+    lateinit var BindingClass : FragmentListPageBinding
+    private lateinit var soundAdapter: SoundAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_page, container, false)
-    }
+        BindingClass = FragmentListPageBinding.inflate(inflater)
+        val sound_list = ArrayList<String>()
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListPage.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListPage().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        sound_list.add("1 Sound")
+        sound_list.add("2 Sound")
+        sound_list.add("3 Sound")
+        sound_list.add("4 Sound")
+
+        BindingClass.rvList.setHasFixedSize(true)
+        BindingClass.rvList.setItemViewCacheSize(20)
+
+        BindingClass.rvList.layoutManager = LinearLayoutManager(BindingClass.root.context)
+        soundAdapter = SoundAdapter(BindingClass.root.context, sound_list)
+        BindingClass.rvList.adapter = soundAdapter
+
+        BindingClass.tvTotalSoundCount.text =  soundAdapter.itemCount.toString()
+
+        return BindingClass.root
     }
 }

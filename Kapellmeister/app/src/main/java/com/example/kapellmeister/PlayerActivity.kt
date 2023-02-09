@@ -11,7 +11,6 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BindingClass = ActivityPlayerBinding.inflate(layoutInflater)
-        setTheme(R.style.Theme_Kapellmeister)
         setContentView(BindingClass.root)
     }
 }
