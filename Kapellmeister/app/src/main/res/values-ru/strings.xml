@@ -7,4 +7,5 @@
     <string name="sound_name">Наименование</string>
     <string name="albom_name">Альбом</string>
     <string name="author_name">Автор</string>
+    <string name="notification_sww">Что-то пошло не так</string>
 </resources>

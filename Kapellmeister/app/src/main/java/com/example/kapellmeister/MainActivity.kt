@@ -1,12 +1,17 @@
 package com.example.kapellmeister
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.kapellmeister.Adapters.SoundAdapter
 import com.example.kapellmeister.Pages.AuthorPage
@@ -34,9 +39,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         ////////////////////    For bottom_menu
-        BindingClass.bnvGeneric.setOnItemSelectedListener /*Подгрузга страниц в Frame*/ {
+        BindingClass.bnvGeneric.setOnItemSelectedListener /* Подгрузга страниц в Frame */ {
             when(it.itemId){
                 R.id.generic_bottom_menu_list_page          -> {
+                    RequestRuntimePermission(11)
                     supportFragmentManager
                         .beginTransaction().replace(R.id.fl_generic, ListPage())
                         .commit()
@@ -57,33 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
         BindingClass.bnvGeneric.selectedItemId = R.id.generic_bottom_menu_list_page // Флаг bottom_menu по дефолту
     }
-
-    private fun RequestRuntimePermission(requestCode: Int) /* Запрос на разрешение использования */ {
-        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestCode)
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) /* Обработчик запросов */ {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 11) /* Память */ {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Доступ к памяти получен", Toast.LENGTH_SHORT).show()
-            }
-            else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),11)
-        }
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean /* Обработчик подтверждения нажатия в left_menu */{
-            if(toogle.onOptionsItemSelected(item)){
-                true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun initializeLayout(){
         installSplashScreen()   // Подгрузка SplashScreen
-        RequestRuntimePermission(11)    // Запрос на доступ к памяти
 
         BindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(BindingClass.root)
@@ -94,4 +75,33 @@ class MainActivity : AppCompatActivity() {
         toogle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+    private fun RequestRuntimePermission(requestCode: Int) /* Запрос на разрешение использования */ {
+        when(requestCode){
+            11 /* Чтение внутренних файлов */ -> {
+                if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), requestCode)
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) /* Обработчик запросов */ {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            11 /* Чтение внутренних файлов */ -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Доступ к чтению внутреней памяти получен", Toast.LENGTH_SHORT).show()
+                }
+                else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),11)
+            }
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean /* Обработчик подтверждения нажатия в left_menu */{
+            if(toogle.onOptionsItemSelected(item)){
+                true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
+

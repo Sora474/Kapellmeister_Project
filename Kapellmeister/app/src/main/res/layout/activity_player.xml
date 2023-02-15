@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/ChapmanRed"
     android:gravity="center"
@@ -21,21 +21,24 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription="Вниз"
             app:srcCompat="@drawable/ic_arrow_down"
-            app:tint="@color/white"
-            android:contentDescription="Вниз"/>
+            app:tint="@color/white" />
 
         <TextView
+            android:id="@+id/tv_song_album"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/albom_name"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:visibility="invisible" />
 
     </LinearLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_song_img"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_margin="10dp"
@@ -46,7 +49,7 @@
     <!-- InfLine -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:orientation="vertical">
 
@@ -56,6 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_song_name"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -73,6 +77,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_song_author"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="start|center_vertical"
@@ -85,7 +90,7 @@
     <!-- ProgressLine -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:orientation="horizontal">
 
@@ -124,33 +129,36 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/ic_shuffle"
             app:tint="@color/Gray" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btn_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
+            android:backgroundTint="@color/Blue_line_jacket"
             app:icon="@drawable/ic_arrow_left"
             app:iconSize="30dp"
             app:iconTint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btn_play_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:backgroundTint="@android:color/transparent"
+            android:backgroundTint="@color/Blue_line_jacket"
             app:icon="@drawable/ic_play"
             app:iconSize="40dp"
             app:iconTint="@color/white"
             app:shapeAppearanceOverlay="@style/curved" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
+            android:backgroundTint="@color/Blue_line_jacket"
             app:icon="@drawable/ic_arrow_right"
             app:iconSize="30dp"
             app:iconTint="@color/white" />
@@ -158,7 +166,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
             app:srcCompat="@drawable/ic_repeat"
             app:tint="@color/Gray" />
