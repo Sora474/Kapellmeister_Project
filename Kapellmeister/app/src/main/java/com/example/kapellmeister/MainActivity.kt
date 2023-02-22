@@ -1,19 +1,16 @@
 package com.example.kapellmeister
 
-import android.Manifest
-import android.app.AlertDialog
-import android.content.Context
+
 import android.content.pm.PackageManager
-import android.os.Build
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.kapellmeister.Adapters.SoundAdapter
+import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Pages.AuthorPage
 import com.example.kapellmeister.Pages.FavoritePage
 import com.example.kapellmeister.Pages.ListPage
@@ -22,6 +19,13 @@ import com.example.kapellmeister.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var BindingClass : ActivityMainBinding
     lateinit var toogle : ActionBarDrawerToggle
+    companion object{
+        lateinit var sound_list: ArrayList<SoundModel>
+        var sound_position: Int = 0
+        var mediaPlayer: MediaPlayer? = null
+        var isPlaing: Boolean = false
+        var isShuffle: Boolean = false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         when(requestCode){
             11 /* Чтение внутренних файлов */ -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Доступ к чтению внутреней памяти получен", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.notification_reed_storage_true), Toast.LENGTH_SHORT).show()
                 }
                 else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),11)
             }

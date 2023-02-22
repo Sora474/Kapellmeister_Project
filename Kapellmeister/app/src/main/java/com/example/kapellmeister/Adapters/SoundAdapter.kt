@@ -5,14 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.Datas.SoundModel
-import com.example.kapellmeister.Datas.TimeFormat
 import com.example.kapellmeister.Holders.SoundHolder
-import com.example.kapellmeister.Pages.BindingClass
 import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
 import com.example.kapellmeister.databinding.VModelSongUnitBinding
@@ -26,10 +24,10 @@ class SoundAdapter(private val context: Context, private val sound_list: ArrayLi
         //  Присвоение параметров sound_list к пользовательскому интерфейсу
         holder.name.text = sound_list[position].name
         holder.author.text = sound_list[position].author
-        holder.time.text = TimeFormat(sound_list[position].time)
+        holder.time.text = DataSound().TimeFormat(sound_list[position].time)
         Glide.with(context)
             .load(sound_list[position].artUri)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef).centerCrop())
+            .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef_black).centerCrop())
             .into(holder.img)
 
         //  Передача context

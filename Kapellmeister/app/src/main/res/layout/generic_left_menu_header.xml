@@ -15,7 +15,7 @@
             android:id="@+id/iv_generic_left_menu_header"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_treble_clef" />
+            app:srcCompat="@drawable/ic_treble_clef_black" />
 
         <TextView
             android:id="@+id/textView"

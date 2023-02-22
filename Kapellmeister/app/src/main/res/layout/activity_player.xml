@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="@color/ChapmanRed"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".PlayerActivity">
 
@@ -41,6 +39,7 @@
         android:id="@+id/iv_song_img"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
         android:src="@drawable/ic_image_png"
         app:shapeAppearanceOverlay="@style/curved"
@@ -122,16 +121,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/btn_shuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
-            app:srcCompat="@drawable/ic_shuffle"
+            app:srcCompat="@drawable/ic_shuffle_off"
             app:tint="@color/Gray" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:backgroundTint="@color/Blue_line_jacket"
-            app:icon="@drawable/ic_play"
+            app:icon="@drawable/ic_pause"
             app:iconSize="40dp"
             app:iconTint="@color/white"
             app:shapeAppearanceOverlay="@style/curved" />
@@ -168,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
-            app:srcCompat="@drawable/ic_repeat"
+            app:srcCompat="@drawable/ic_repeat_off"
             app:tint="@color/Gray" />
 
     </LinearLayout>

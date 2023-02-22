@@ -3,9 +3,11 @@
     <string name="menu_list_page">Список</string>
     <string name="menu_author_page">Исполнители</string>
     <string name="menu_favorite_page">Коллекции</string>
-    <string name="total_sound">Всего композиций:</string>
+    <string name="total_sound">"Всего композиций: "</string>
     <string name="sound_name">Наименование</string>
     <string name="albom_name">Альбом</string>
     <string name="author_name">Автор</string>
     <string name="notification_sww">Что-то пошло не так</string>
+    <string name="notification_reed_storage_true">"Получен доступ для чтения внутренней памяти "</string>
+    <string name="error_unknown">Неизвестен</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.kapellmeister.Pages
 
 
-import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,11 +11,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kapellmeister.Adapters.SoundAdapter
-import com.example.kapellmeister.Datas.DataPermission
+import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.Datas.SoundModel
-import com.example.kapellmeister.MainActivity
 import com.example.kapellmeister.R
-import com.example.kapellmeister.databinding.ActivityMainBinding
 import com.example.kapellmeister.databinding.FragmentListPageBinding
 import java.io.File
 
@@ -42,7 +39,7 @@ class ListPage : Fragment(R.layout.fragment_list_page) {
         soundAdapter = SoundAdapter(BindingClass.root.context, sound_list)
         BindingClass.rvList.adapter = soundAdapter
 
-        BindingClass.tvTotalSoundCount.text =  soundAdapter.itemCount.toString()
+        BindingClass.tvTotalSound.text =  getString(R.string.total_sound) + DataSound().getSizeSoundList(sound_list).toString()
 
         return BindingClass.root
     }

@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.Kapellmeister.Splash_Screen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/ChapmanRed</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/icon_treble_clef</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <item name="postSplashScreenTheme">@style/Theme.Kapellmeister</item>
     </style>
 

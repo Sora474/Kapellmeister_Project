@@ -22,14 +22,6 @@
                 android:text="@string/total_sound"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/tv_total_sound_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="dadsadsad"
-                android:textColor="@color/black"
-                android:layout_marginStart="4dp"/>
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
