@@ -2,7 +2,6 @@ package com.example.kapellmeister
 
 
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,17 +13,19 @@ import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Pages.AuthorPage
 import com.example.kapellmeister.Pages.FavoritePage
 import com.example.kapellmeister.Pages.ListPage
+import com.example.kapellmeister.Services.SoundService
 import com.example.kapellmeister.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     lateinit var BindingClass : ActivityMainBinding
     lateinit var toogle : ActionBarDrawerToggle
     companion object{
         lateinit var sound_list: ArrayList<SoundModel>
         var sound_position: Int = 0
-        var mediaPlayer: MediaPlayer? = null
         var isPlaing: Boolean = false
         var isShuffle: Boolean = false
+
+        var soundService: SoundService? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,6 +107,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
 
