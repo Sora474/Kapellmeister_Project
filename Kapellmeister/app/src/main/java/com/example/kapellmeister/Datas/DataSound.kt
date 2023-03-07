@@ -46,23 +46,22 @@ class DataSound(){
         changePlauPauseSound()
     }
     private fun changePlauPauseSound() /* Связанные действия Запуска/Останови плейера */ {
-       /* if(MainActivity.isPlaing){
-            PlayerActivity().BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
+        if(MainActivity.isPlaing){
+            PlayerActivity.BindingClass.btnPlayPause.setIconResource(R.drawable.ic_pause)
         }
         else{
-            PlayerActivity().BindingClass.btnPlayPause.setIconResource(R.drawable.ic_pause)
-        }*/
+            PlayerActivity.BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
+        }
         MainActivity.soundService?.showNotification()
-
     }
-    fun moveSound(crement: Boolean) /* Смещение аудио файла плейера */ {
+    fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
         if(crement)
             setCanMoveSound(true)
         else
             setCanMoveSound(false)
 
+        PlayerActivity().setLayout(context)
         createMediaPlayer()
-        //PlayerActivity().setLayout()
     }
     fun setCanMoveSound(crement: Boolean) /* Определение возможности смещение аудио файла плейера */ {
         if(crement){

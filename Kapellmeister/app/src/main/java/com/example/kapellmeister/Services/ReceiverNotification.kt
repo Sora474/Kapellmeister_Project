@@ -16,8 +16,8 @@ class ReceiverNotification: BroadcastReceiver() {
                 if (MainActivity.isPlaing) DataSound().pauseSound()
                 else DataSound().playSound()
             }
-            ApplicationClass.NEXT      -> DataSound().moveSound(true)
-            ApplicationClass.PREVIOUS  -> DataSound().moveSound(false)
+            ApplicationClass.NEXT      -> DataSound().moveSound(true,  p0!!)
+            ApplicationClass.PREVIOUS  -> DataSound().moveSound(false, p0!!)
             ApplicationClass.CLOSE     -> {
                 MainActivity.soundService?.stopForeground(true)
                 MainActivity.soundService = null

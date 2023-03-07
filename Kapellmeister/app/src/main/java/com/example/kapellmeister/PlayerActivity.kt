@@ -18,8 +18,9 @@ import com.example.kapellmeister.Services.SoundService
 import com.example.kapellmeister.databinding.ActivityPlayerBinding
 
 class PlayerActivity : AppCompatActivity(), ServiceConnection {
-    lateinit var BindingClass : ActivityPlayerBinding
-
+    companion object{
+        lateinit var BindingClass : ActivityPlayerBinding
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeLayout()
@@ -27,20 +28,16 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
         BindingClass.btnPlayPause.setOnClickListener(){
             if(isPlaing){
                 DataSound().pauseSound()
-                BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
             }
             else {
                 DataSound().playSound()
-                BindingClass.btnPlayPause.setIconResource(R.drawable.ic_pause)
             }
         }
         BindingClass.btnNext.setOnClickListener(){
-            DataSound().moveSound(true)
-            setLayout()
+            DataSound().moveSound(true, this)
         }
         BindingClass.btnPrevious.setOnClickListener(){
-            DataSound().moveSound(false)
-            setLayout()
+            DataSound().moveSound(false, this)
         }
         BindingClass.btnShuffle.setOnClickListener(){
             DataSound().changeStatusSoundShuffle()
@@ -60,7 +57,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
             "SoundAdapter" -> {
                 MainActivity.sound_list = ArrayList()
                 MainActivity.sound_list.addAll(ListPage.sound_list)
-                setLayout()
+                setLayout(this)
 
                 ////////////////////    For starting service
                 val intent = Intent(this, SoundService()::class.java)
@@ -69,8 +66,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
             }
         }
     }
-    fun setLayout() /* Присвоение визуальных данных */ {
-        Glide.with(this)
+    fun setLayout(context: Context) /* Присвоение визуальных данных */ {
+        Glide.with(context)
             .load(MainActivity.sound_list[sound_position].artUri)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef_white).centerCrop())
             .into(BindingClass.ivSongImg)
