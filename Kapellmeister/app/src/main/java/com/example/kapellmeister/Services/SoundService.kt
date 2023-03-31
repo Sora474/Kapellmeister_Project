@@ -40,7 +40,7 @@ class SoundService : Service() {
         val previousPendingIntent = PendingIntent.getBroadcast(this, 0, previousIntent, PendingIntent.FLAG_IMMUTABLE)  //  в Notification
 
         val closeIntent = Intent(this, ReceiverNotification::class.java).setAction(ApplicationClass.CLOSE)                  //  Binding закрытия
-        val closePendingIntent = PendingIntent.getBroadcast(this, 0, closeIntent, PendingIntent.FLAG_IMMUTABLE)        //  Notification
+        val closePendingIntent = PendingIntent.getBroadcast(this, 0, closeIntent, PendingIntent.FLAG_IMMUTABLE)        //  в Notification
 
         val imgArt = DataSound().getImageArt(MainActivity.sound_list[MainActivity.sound_position].path)
 

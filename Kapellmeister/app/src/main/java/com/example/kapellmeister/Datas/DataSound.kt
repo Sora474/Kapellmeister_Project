@@ -34,6 +34,20 @@ class DataSound(){
             MainActivity.soundService?.mediaPlayer?.prepare()
             playSound()
         }catch (e: Exception){return}
+
+        PlayerActivity().setSeekBarView()
+    }
+    fun completedSound(context: Context) /* Действия при окончании проигрывания файла */ {
+        MainActivity.soundService?.mediaPlayer?.setOnCompletionListener()
+        {
+            when(MainActivity.isRepeat){
+                0 -> DataSound().moveSound(true, context)
+                1 -> DataSound().moveSound(true, context, true)
+                2 -> {
+                    createMediaPlayer()
+                }
+            }
+        }
     }
     fun playSound() /* Запуск плейера */ {
         MainActivity.isPlaing = true
@@ -46,47 +60,55 @@ class DataSound(){
         changePlauPauseSound()
     }
     private fun changePlauPauseSound() /* Связанные действия Запуска/Останови плейера */ {
-        if(MainActivity.isPlaing){
-            PlayerActivity.BindingClass.btnPlayPause.setIconResource(R.drawable.ic_pause)
-        }
-        else{
-            PlayerActivity.BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
-        }
+        PlayerActivity().initializeBtntnPlayPause()
         MainActivity.soundService?.showNotification()
     }
-    fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
-        if(crement)
-            setCanMoveSound(true)
-        else
-            setCanMoveSound(false)
+    fun moveSound(crement: Boolean, context: Context, repeatPlayList: Boolean = false) /* Смещение аудио файла плейера */ {
+       if (MainActivity.isShuffle && crement){
+           MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
+           PlayerActivity().setLayout(context)
+           createMediaPlayer()
+       }else {
+           if(crement){
+               setCanMoveSound(true)
+               PlayerActivity().setLayout(context)
 
-        PlayerActivity().setLayout(context)
-        createMediaPlayer()
+               if (MainActivity.sound_position != 0) createMediaPlayer()
+               else{ if (repeatPlayList) createMediaPlayer()
+                     else{
+                         createMediaPlayer()
+                         pauseSound()
+                     }
+               }
+           }
+           else{
+               setCanMoveSound(false)
+               PlayerActivity().setLayout(context)
+
+               if (MainActivity.sound_position != MainActivity.sound_list.size - 1) createMediaPlayer()
+               else {
+                   createMediaPlayer()
+                   pauseSound()
+               }
+           }
+       }
     }
     fun setCanMoveSound(crement: Boolean) /* Определение возможности смещение аудио файла плейера */ {
         if(crement){
-            if (MainActivity.sound_position < MainActivity.sound_list.size - 1)
-                MainActivity.sound_position++
+            if (MainActivity.sound_position < MainActivity.sound_list.size - 1) MainActivity.sound_position++
             else MainActivity.sound_position = 0
         }
         else{
-            if (MainActivity.sound_position == 0)
-                MainActivity.sound_position = MainActivity.sound_list.size - 1
-            else MainActivity.sound_position--
+            if (MainActivity.sound_position != 0) MainActivity.sound_position--
+            else MainActivity.sound_position = MainActivity.sound_list.size - 1
         }
     }
-    fun changeStatusSoundShuffle() /* Изменение статуса активности случайного смещение аудио файла плейера */ {
+    fun changeStatusSoundShuffle() /* Изменение статуса активности случайного смещения аудио файла плейера */ {
         MainActivity.isShuffle = MainActivity.isShuffle.not()
     }
-    fun moveSoundShuffle() /* Случайное смещение аудио файла плейера */ {
-        // дописать
-        if(MainActivity.isShuffle){
-            MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
-            createMediaPlayer()
-
-        }else {
-
-        }
+    fun changeStatusSoundRepeat() /* Изменение статуса активности повторного воспроизведения аудио файла плейера */ {
+        if (MainActivity.isRepeat <2) MainActivity.isRepeat++
+        else MainActivity.isRepeat = 0
     }
 }
 

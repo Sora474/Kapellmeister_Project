@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity(){
     companion object{
         lateinit var sound_list: ArrayList<SoundModel>
         var sound_position: Int = 0
-        var isPlaing: Boolean = false
-        var isShuffle: Boolean = false
+        var isPlaing      : Boolean = false
+        var isShuffle     : Boolean = false
+        var isRepeat      : Int = 0
 
         var soundService: SoundService? = null
     }
