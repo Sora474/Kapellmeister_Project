@@ -11,11 +11,20 @@
     <string name="menu_favorite_page">Favorite</string>
 
     <string name="total_sound">"Total Songs: "</string>
+    <string name="total_author">"Total Authors: "</string>
+    <string name="total_author_sound">"Total Sound Authors: "</string>
+
     <string name="sound_name">Sound Name</string>
     <string name="albom_name">Albom Name</string>
     <string name="author_name">Author Name</string>
+
     <string name="notification_sww">Something went wrong</string>
     <string name="notification_reed_storage_true">Internal memory read access obtained</string>
+
     <string name="error_unknown">Unknown</string>
+    <string name="exit">Exit</string>
+    <string name="exit_question">Are you sure you want to exit the app?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

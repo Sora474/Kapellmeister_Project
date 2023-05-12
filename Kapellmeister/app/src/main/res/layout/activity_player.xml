@@ -76,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@android:color/transparent"
+                android:contentDescription=" "
                 app:srcCompat="@drawable/ic_favorite_false"
                 app:tint="@color/white" />
 
@@ -140,17 +141,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription=" "
             app:srcCompat="@drawable/ic_shuffle_off"
-            app:tint="@color/Gray" />
+            app:tint="@color/Gray"/>
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <ImageButton
             android:id="@+id/btn_previous"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/Mint"
-            app:icon="@drawable/ic_arrow_left"
-            app:iconSize="30dp"
-            app:iconTint="@color/white" />
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription=" "
+            app:srcCompat="@drawable/ic_arrow_left"
+            app:tint="@color/white"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btn_play_pause"
@@ -158,19 +160,20 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:backgroundTint="@color/Mint"
+            android:contentDescription=" "
             app:icon="@drawable/ic_pause"
             app:iconSize="40dp"
             app:iconTint="@color/white"
             app:shapeAppearanceOverlay="@style/curved" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/Mint"
-            app:icon="@drawable/ic_arrow_right"
-            app:iconSize="30dp"
-            app:iconTint="@color/white" />
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription=" "
+            app:srcCompat="@drawable/ic_arrow_right"
+            app:tint="@color/white"/>
 
         <ImageButton
             android:id="@+id/btn_Repeat"
@@ -178,8 +181,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription=" "
             app:srcCompat="@drawable/ic_repeat_off"
-            app:tint="@color/Gray" />
+            app:tint="@color/Gray"/>
 
     </LinearLayout>
 

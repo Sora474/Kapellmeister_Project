@@ -42,10 +42,8 @@ class DataSound(){
         {
             when(MainActivity.isRepeat){
                 0 -> DataSound().moveSound(true, context)
-                1 -> DataSound().moveSound(true, context, true)
-                2 -> {
-                    createMediaPlayer()
-                }
+                1 -> DataSound().moveSound(true, context)
+                2 -> createMediaPlayer()
             }
         }
     }
@@ -63,7 +61,7 @@ class DataSound(){
         PlayerActivity().initializeBtntnPlayPause()
         MainActivity.soundService?.showNotification()
     }
-    fun moveSound(crement: Boolean, context: Context, repeatPlayList: Boolean = false) /* Смещение аудио файла плейера */ {
+    fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
        if (MainActivity.isShuffle && crement){
            MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
            PlayerActivity().setLayout(context)
@@ -74,7 +72,7 @@ class DataSound(){
                PlayerActivity().setLayout(context)
 
                if (MainActivity.sound_position != 0) createMediaPlayer()
-               else{ if (repeatPlayList) createMediaPlayer()
+               else{ if (MainActivity.isRepeat == 1) createMediaPlayer()
                      else{
                          createMediaPlayer()
                          pauseSound()

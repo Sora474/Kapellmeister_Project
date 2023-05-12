@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.os.Looper
 import android.text.style.TabStopSpan
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -50,6 +51,9 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
             DataSound().changeStatusSoundRepeat()
             initializeBtnRepeat()
         }
+        BindingClass.btnDown.setOnClickListener(){
+            finish()
+        }
         BindingClass.sbSongLine.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 if (p2) MainActivity.soundService?.mediaPlayer?.seekTo(p1)
@@ -69,8 +73,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         sound_position = intent.getIntExtra("sound_index",0)
         when(intent.getStringExtra("sound_class")){
             "SoundAdapter" -> {
-                MainActivity.sound_list = ArrayList()
-                MainActivity.sound_list.addAll(ListPage.sound_list)
                 setLayout(this)
 
                 ////////////////////    For starting service

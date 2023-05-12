@@ -20,6 +20,7 @@ class ReceiverNotification: BroadcastReceiver() {
             ApplicationClass.PREVIOUS  -> DataSound().moveSound(false, p0!!)
             ApplicationClass.CLOSE     -> {
                 MainActivity.soundService?.stopForeground(true)
+                MainActivity.soundService?.mediaPlayer?.release()
                 MainActivity.soundService = null
                 exitProcess(1)
             }
