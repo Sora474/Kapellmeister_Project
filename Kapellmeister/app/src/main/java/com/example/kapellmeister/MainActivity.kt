@@ -8,14 +8,17 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.red
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.kapellmeister.Adapters.SoundAdapter
 import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Pages.AuthorPage
 import com.example.kapellmeister.Pages.FavoritePage
@@ -30,7 +33,9 @@ class MainActivity : AppCompatActivity(){
     lateinit var BindingClass : ActivityMainBinding
     lateinit var toogle : ActionBarDrawerToggle
     companion object{
+        lateinit var initial_list: ArrayList<SoundModel>
         lateinit var sound_list: ArrayList<SoundModel>
+        lateinit var search_sound_list: ArrayList<SoundModel>
         var sound_position: Int = 0
         var isPlaing      : Boolean = false
         var isShuffle     : Boolean = false
@@ -44,7 +49,8 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         initializeLayout()
         RequestRuntimePermission(11)
-        sound_list = getSoundAll()  //  Получение ПлейЛиста
+        initial_list = getSoundAll()  //  Получение ПлейЛиста
+        sound_list = initial_list;
 
         ////////////////////    For left_menu
         BindingClass.nvGeneric.setNavigationItemSelectedListener{
@@ -93,7 +99,6 @@ class MainActivity : AppCompatActivity(){
                         .commit()
                 }
             }
-
             true
         }
         BindingClass.bnvGeneric.selectedItemId = R.id.generic_bottom_menu_list_page // Флаг bottom_menu по дефолту
@@ -104,7 +109,7 @@ class MainActivity : AppCompatActivity(){
             soundService?.stopForeground(true)
             soundService?.mediaPlayer?.release()
             soundService = null
-            exitProcess(1)
+            System.exit(0)
         }
     }
     private fun initializeLayout(){

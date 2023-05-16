@@ -11,11 +11,14 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.text.style.TabStopSpan
+import android.view.Menu
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.kapellmeister.Adapters.SoundAdapter
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.MainActivity.Companion.isPlaing
 import com.example.kapellmeister.MainActivity.Companion.sound_position
@@ -51,6 +54,9 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
             DataSound().changeStatusSoundRepeat()
             initializeBtnRepeat()
         }
+        BindingClass.btnFavorite.setOnClickListener(){
+            initializeBtnFavorite()
+        }
         BindingClass.btnDown.setOnClickListener(){
             finish()
         }
@@ -66,12 +72,15 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
     private fun initializeLayout() /* Подгрузка данных в Activity */ {
         BindingClass = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(BindingClass.root)
-        initializeBtntnPlayPause()
+        initializeBtnPlayPause()
         initializeBtnRepeat()
         initializeBtnShuffle()
 
         sound_position = intent.getIntExtra("sound_index",0)
         when(intent.getStringExtra("sound_class")){
+            "NowPlaying" -> {
+                setLayout(this)
+            }
             "SoundAdapter" -> {
                 setLayout(this)
 
@@ -83,9 +92,12 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         }
     }
 
-    fun initializeBtntnPlayPause() /* Инициализация отображения кнопки Запуска/Останови аудио файла плейера */ {
+    fun initializeBtnPlayPause() /* Инициализация отображения кнопки Запуска/Останови аудио файла плейера */ {
         if(MainActivity.isPlaing) BindingClass.btnPlayPause.setIconResource(R.drawable.ic_pause)
         else BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
+    }
+    fun initializeBtnFavorite() /* Инициализация отображения кнопки Запуска/Останови аудио файла плейера */ {
+        BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
     }
     private fun initializeBtnRepeat() /* Инициализация отображения кнопки статуса активности повтора аудио файла плейера */ {
         when(MainActivity.isRepeat){

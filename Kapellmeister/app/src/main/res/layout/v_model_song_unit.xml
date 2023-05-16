@@ -29,7 +29,10 @@
         android:layout_toEndOf="@+id/model_song_img"
         android:gravity="center_vertical"
         android:text="@string/sound_name"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/model_song_author_name"

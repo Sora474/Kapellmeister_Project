@@ -16,4 +16,5 @@
     <string name="exit">Выход</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="search">Поиск</string>
 </resources>

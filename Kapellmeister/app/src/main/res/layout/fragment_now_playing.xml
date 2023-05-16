@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ChapmanRed"
+    tools:context=".NowPlaying">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_sound_img"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:src="@drawable/ic_treble_clef_white"
+        app:shapeAppearanceOverlay="@style/curved" />
+
+    <ImageButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription=" "
+        app:srcCompat="@drawable/ic_arrow_right"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btn_playPause"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_toStartOf="@+id/btn_next"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription=" "
+        app:srcCompat="@drawable/ic_play"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_sound_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_toStartOf="@+id/btn_playPause"
+        android:layout_toEndOf="@+id/iv_sound_img"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="@string/sound_name"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

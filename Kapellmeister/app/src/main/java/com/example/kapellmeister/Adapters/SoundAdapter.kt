@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Holders.SoundHolder
+import com.example.kapellmeister.MainActivity
 import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
 import com.example.kapellmeister.databinding.VModelSongUnitBinding
@@ -41,5 +42,13 @@ class SoundAdapter(private val context: Context, private val sound_list: ArrayLi
 
     override fun getItemCount(): Int {
         return sound_list.size
+    }
+
+    //  Параметры запуска PlayerActivity
+    fun getIntent(ref: String, pos: Int){
+        val intent = Intent(context, PlayerActivity::class.java)
+        intent.putExtra("sound_index", pos)
+        intent.putExtra("sound_class", ref)
+        ContextCompat.startActivity(context, intent, null)
     }
 }

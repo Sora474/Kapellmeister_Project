@@ -3,7 +3,9 @@ package com.example.kapellmeister.Datas
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
+import androidx.core.view.get
 import com.example.kapellmeister.MainActivity
+import com.example.kapellmeister.NowPlaying
 import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
 import com.example.kapellmeister.Services.SoundService
@@ -58,14 +60,15 @@ class DataSound(){
         changePlauPauseSound()
     }
     private fun changePlauPauseSound() /* Связанные действия Запуска/Останови плейера */ {
-        PlayerActivity().initializeBtntnPlayPause()
+        PlayerActivity().initializeBtnPlayPause()
+        //NowPlaying().initializeBtntnPlayPause()
         MainActivity.soundService?.showNotification()
     }
     fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
        if (MainActivity.isShuffle && crement){
            MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
            PlayerActivity().setLayout(context)
-           createMediaPlayer()
+           //NowPlaying().setLayout()
        }else {
            if(crement){
                setCanMoveSound(true)
