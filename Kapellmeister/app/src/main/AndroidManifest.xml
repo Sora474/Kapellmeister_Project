@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -15,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kapellmeister"
         tools:targetApi="31">
+        <activity
+            android:name=".AuthorList"
+            android:exported="false" />
         <activity
             android:name=".PlayerActivity"
             android:exported="false"
@@ -42,16 +54,16 @@
         <service
             android:name=".Services.SoundService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
-        <receiver android:name=".Services.ReceiverNotification"
+        <receiver
+            android:name=".Services.ReceiverNotification"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name=".ApplicationClass.PREVIOUS" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

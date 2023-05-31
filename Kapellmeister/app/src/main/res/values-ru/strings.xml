@@ -2,7 +2,7 @@
     <string name="app_name">Kapellmeister</string>
     <string name="menu_list_page">Список</string>
     <string name="menu_author_page">Исполнители</string>
-    <string name="menu_favorite_page">Коллекции</string>
+    <string name="menu_favorite_page">Избранное</string>
     <string name="total_sound">"Всего композиций: "</string>
     <string name="sound_name">Наименование</string>
     <string name="albom_name">Альбом</string>
@@ -17,4 +17,5 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="search">Поиск</string>
+    <string name="menu_collection_page">Коллекции</string>
 </resources>

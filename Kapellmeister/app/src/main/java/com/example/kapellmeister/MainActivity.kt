@@ -2,27 +2,25 @@ package com.example.kapellmeister
 
 
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.graphics.red
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.kapellmeister.Adapters.SoundAdapter
+import androidx.fragment.app.Fragment
 import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Pages.AuthorPage
+import com.example.kapellmeister.Pages.CollectionPage
 import com.example.kapellmeister.Pages.FavoritePage
 import com.example.kapellmeister.Pages.ListPage
+import com.example.kapellmeister.Pages.NowPlaying
 import com.example.kapellmeister.Services.SoundService
 import com.example.kapellmeister.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,9 +32,11 @@ class MainActivity : AppCompatActivity(){
     lateinit var toogle : ActionBarDrawerToggle
     companion object{
         lateinit var initial_list: ArrayList<SoundModel>
+        lateinit var author_sound_list: ArrayList<SoundModel>
+        lateinit var favorite_sound_list: ArrayList<SoundModel>
         lateinit var sound_list: ArrayList<SoundModel>
         lateinit var search_sound_list: ArrayList<SoundModel>
-        var sound_position: Int = 0
+        var sound_position: Int = -1
         var isPlaing      : Boolean = false
         var isShuffle     : Boolean = false
         var isRepeat      : Int = 0
@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity(){
         initializeLayout()
         RequestRuntimePermission(11)
         initial_list = getSoundAll()  //  Получение ПлейЛиста
-        sound_list = initial_list;
+        sound_list = initial_list
+        author_sound_list = ArrayList()
+        favorite_sound_list = ArrayList()
 
         ////////////////////    For left_menu
         BindingClass.nvGeneric.setNavigationItemSelectedListener{
@@ -93,6 +95,11 @@ class MainActivity : AppCompatActivity(){
                         .beginTransaction().replace(R.id.fl_generic, AuthorPage())
                         .commit()
                 }
+                R.id.generic_bottom_menu_collection_page -> {
+                    supportFragmentManager
+                        .beginTransaction().replace(R.id.fl_generic, CollectionPage())
+                        .commit()
+                }
                 R.id.generic_bottom_menu_favorite_page -> {
                     supportFragmentManager
                         .beginTransaction().replace(R.id.fl_generic, FavoritePage())
@@ -124,7 +131,7 @@ class MainActivity : AppCompatActivity(){
         toogle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-    private fun getSoundAll() : ArrayList<SoundModel> /* Получение всех аудиофайлов из внешнего хранилища */ {
+    private fun getSoundAll() : ArrayList<SoundModel> /* Получение всех аудиофайлов из локального хранилища */ {
         val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val temp_list = ArrayList<SoundModel>()
         val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"

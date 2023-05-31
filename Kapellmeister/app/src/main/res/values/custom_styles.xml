@@ -9,4 +9,7 @@
     <style name="curved">
         <item name="cornerSize">15%</item>
     </style>
+    <style name="curvedBig">
+        <item name="cornerSize">75%</item>
+    </style>
 </resources>

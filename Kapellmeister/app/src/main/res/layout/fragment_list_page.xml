@@ -18,26 +18,13 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_total_sound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_total_sound"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_sound"
-                    android:textColor="@color/black" />
-
-                <ImageButton
-                    android:id="@+id/btn_search"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription=" "
-                    android:src="@drawable/ic_search_black" />
-
-            </LinearLayout>
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/total_sound"
+                android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list"

@@ -3,12 +3,9 @@ package com.example.kapellmeister.Datas
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
-import androidx.core.view.get
 import com.example.kapellmeister.MainActivity
-import com.example.kapellmeister.NowPlaying
+import com.example.kapellmeister.Pages.NowPlaying
 import com.example.kapellmeister.PlayerActivity
-import com.example.kapellmeister.R
-import com.example.kapellmeister.Services.SoundService
 import java.util.concurrent.TimeUnit
 
 
@@ -61,18 +58,19 @@ class DataSound(){
     }
     private fun changePlauPauseSound() /* Связанные действия Запуска/Останови плейера */ {
         PlayerActivity().initializeBtnPlayPause()
-        //NowPlaying().initializeBtntnPlayPause()
+        NowPlaying().initializeBtnPlayPause()
         MainActivity.soundService?.showNotification()
     }
     fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
        if (MainActivity.isShuffle && crement){
            MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
            PlayerActivity().setLayout(context)
-           //NowPlaying().setLayout()
+           NowPlaying().setLayout(context)
        }else {
            if(crement){
                setCanMoveSound(true)
                PlayerActivity().setLayout(context)
+               NowPlaying().setLayout(context)
 
                if (MainActivity.sound_position != 0) createMediaPlayer()
                else{ if (MainActivity.isRepeat == 1) createMediaPlayer()
@@ -85,6 +83,7 @@ class DataSound(){
            else{
                setCanMoveSound(false)
                PlayerActivity().setLayout(context)
+               NowPlaying().setLayout(context)
 
                if (MainActivity.sound_position != MainActivity.sound_list.size - 1) createMediaPlayer()
                else {

@@ -16,29 +16,29 @@
         <FrameLayout
             android:id="@+id/fl_generic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="58dp"
-            app:layout_constraintBottom_toTopOf="@+id/bnv_generic"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.016">
+            app:layout_constraintTop_toTopOf="parent">
 
         </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/fl_generic"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_generic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/fl_generic">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fc_now_playing"
-                android:name="com.example.kapellmeister.NowPlaying"
+                android:name="com.example.kapellmeister.Pages.NowPlaying"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout="@layout/fragment_now_playing" />
@@ -52,8 +52,9 @@
             app:backgroundTint="@color/ChapmanRed"
             app:itemIconTint="@drawable/generic_bottom_menu_selector"
             app:itemTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/fl_generic"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fl_generic"
+            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/generic_bottom_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -67,6 +68,6 @@
         app:headerLayout="@layout/generic_left_menu_header"
         app:itemIconTint="@drawable/generic_left_menu_selector"
         app:itemTextColor="@color/white"
-        app:menu="@menu/generic_left_menu"/>
+        app:menu="@menu/generic_left_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

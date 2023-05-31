@@ -10,8 +10,13 @@
         android:title="@string/menu_author_page"
         android:orderInCategory="2"/>
 
-    <item android:id="@+id/generic_bottom_menu_favorite_page"
+    <item android:id="@+id/generic_bottom_menu_collection_page"
         android:icon="@drawable/ic_collection"
-        android:title="@string/menu_favorite_page"
+        android:title="@string/menu_collection_page"
         android:orderInCategory="3"/>
+
+    <item android:id="@+id/generic_bottom_menu_favorite_page"
+        android:icon="@drawable/ic_favorite_false"
+        android:title="@string/menu_favorite_page"
+        android:orderInCategory="4"/>
 </menu>

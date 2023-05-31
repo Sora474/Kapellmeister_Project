@@ -30,6 +30,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
     companion object{
         lateinit var BindingClass : ActivityPlayerBinding
         private lateinit var runnable: Runnable
+        var isFavorite      : Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,18 +77,41 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         initializeBtnRepeat()
         initializeBtnShuffle()
 
-        sound_position = intent.getIntExtra("sound_index",0)
+        var tempCheck = false
+        var tempCheckList = false
+        if(sound_position == intent.getIntExtra("sound_index",0)) tempCheck = true
+        else sound_position = intent.getIntExtra("sound_index",0)
+
         when(intent.getStringExtra("sound_class")){
             "NowPlaying" -> {
                 setLayout(this)
             }
-            "SoundAdapter" -> {
+            "MainSoundList" -> {
+                MainActivity.sound_list = MainActivity.initial_list
                 setLayout(this)
 
-                ////////////////////    For starting service
-                val intent = Intent(this, SoundService()::class.java)
-                bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
-                startService(intent)
+                    ////////////////////    For starting service
+                    val intent = Intent(this, SoundService()::class.java)
+                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
+                    startService(intent)
+            }
+            "AuthorSoundList" -> {
+                MainActivity.sound_list = MainActivity.author_sound_list
+                setLayout(this)
+
+                    ////////////////////    For starting service
+                    val intent = Intent(this, SoundService()::class.java)
+                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
+                    startService(intent)
+            }
+            "FavoriteSoundList" -> {
+                MainActivity.sound_list = MainActivity.favorite_sound_list
+                setLayout(this)
+
+                    ////////////////////    For starting service
+                    val intent = Intent(this, SoundService()::class.java)
+                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
+                    startService(intent)
             }
         }
     }
@@ -97,7 +121,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         else BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
     }
     fun initializeBtnFavorite() /* Инициализация отображения кнопки Запуска/Останови аудио файла плейера */ {
-        BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
+        if(isFavorite) BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
+        else BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_false)
     }
     private fun initializeBtnRepeat() /* Инициализация отображения кнопки статуса активности повтора аудио файла плейера */ {
         when(MainActivity.isRepeat){

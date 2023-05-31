@@ -26,7 +26,7 @@ class AuthorPage : Fragment(R.layout.fragment_author_page) {
         BindingClass = FragmentAuthorPageBinding.inflate(inflater)
 
         var temp_list = ArrayList<String>()
-        MainActivity.sound_list.forEach{temp_list.add(it.author)}  //  Получение ПлейЛиста
+        MainActivity.initial_list.forEach{temp_list.add(it.author)}  //  Получение ПлейЛиста
         author_list = temp_list.toSortedSet().toList() //  Преобразвание ПлейЛиста
 
         BindingClass.rvList.setHasFixedSize(true)

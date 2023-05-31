@@ -1,15 +1,20 @@
-package com.example.kapellmeister
+package com.example.kapellmeister.Pages
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kapellmeister.Datas.DataSound
+import com.example.kapellmeister.MainActivity
+import com.example.kapellmeister.PlayerActivity
+import com.example.kapellmeister.R
+import com.example.kapellmeister.databinding.FragmentListPageBinding
 import com.example.kapellmeister.databinding.FragmentNowPlayingBinding
 
 private lateinit var BindingClass : FragmentNowPlayingBinding
@@ -25,11 +30,10 @@ class NowPlaying : Fragment(R.layout.fragment_now_playing) {
         BindingClass.btnPlayPause.setOnClickListener(){
             if(MainActivity.isPlaing) DataSound().pauseSound()
             else DataSound().playSound()
-            initializeBtnPlayPause()    // Необходимо перенести в DataSound
         }
         BindingClass.btnNext.setOnClickListener(){
             DataSound().moveSound(true, BindingClass.root.context)
-            setLayout() // Необходимо перенести в DataSound
+           // setLayout() // Необходимо перенести в DataSound
         }
         BindingClass.root.setOnClickListener(){
             val intent = Intent(requireContext(), PlayerActivity::class.java)
@@ -43,15 +47,15 @@ class NowPlaying : Fragment(R.layout.fragment_now_playing) {
 
     override fun onResume() {
         super.onResume()
-        setLayout()
+        setLayout(BindingClass.root.context)
     }
 
-    fun setLayout() /* Присвоение визуальных данных */ {
+    fun setLayout(context: Context) /* Присвоение визуальных данных */ {
         if(MainActivity.soundService != null){
             BindingClass.root.visibility = View.VISIBLE
 
             BindingClass.tvSoundName.isSelected = true
-            Glide.with(this)
+            Glide.with(context)
                 .load(MainActivity.sound_list[MainActivity.sound_position].artUri)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef_white).centerCrop())
                 .into(BindingClass.ivSoundImg)
@@ -63,9 +67,9 @@ class NowPlaying : Fragment(R.layout.fragment_now_playing) {
         }
     }
     fun initializeBtnPlayPause() /* Инициализация отображения кнопки Запуска/Останови аудио файла плейера */ {
-        if(MainActivity.isPlaing) BindingClass.btnPlayPause.setImageResource(R.drawable.ic_pause)
+        if(MainActivity.isPlaing) BindingClass.btnPlayPause.setImageResource(
+            R.drawable.ic_pause
+        )
         else BindingClass.btnPlayPause.setImageResource(R.drawable.ic_play)
     }
 }
-
-

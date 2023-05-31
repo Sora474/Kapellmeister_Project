@@ -10,22 +10,26 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.Datas.SoundModel
+import com.example.kapellmeister.Holders.AuthorHolder
+import com.example.kapellmeister.Holders.FavoriteHolder
 import com.example.kapellmeister.Holders.SoundHolder
 import com.example.kapellmeister.MainActivity
 import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
+import com.example.kapellmeister.databinding.VModelAuthorUnitBinding
+import com.example.kapellmeister.databinding.VModelFavoriteUnitBinding
 import com.example.kapellmeister.databinding.VModelSongUnitBinding
 
-class SoundAdapter(private val context: Context, private val sound_list: ArrayList<SoundModel>): RecyclerView.Adapter<SoundHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundHolder {
-        return SoundHolder(VModelSongUnitBinding.inflate(LayoutInflater.from(context), parent, false))
+class FavoriteAdapter(private val context: Context, private val sound_list: ArrayList<SoundModel>): RecyclerView.Adapter<FavoriteHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteHolder {
+        return FavoriteHolder(VModelFavoriteUnitBinding.inflate(LayoutInflater.from(context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: SoundHolder, position: Int) {
+
+
+    override fun onBindViewHolder(holder: FavoriteHolder, position: Int) {
         //  Присвоение параметров sound_list к пользовательскому интерфейсу
         holder.name.text = sound_list[position].name
-        holder.author.text = sound_list[position].author
-        holder.time.text = DataSound().TimeFormat(sound_list[position].time)
         Glide.with(context)
             .load(sound_list[position].artUri)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef_black).centerCrop())
@@ -34,8 +38,7 @@ class SoundAdapter(private val context: Context, private val sound_list: ArrayLi
         //  Передача context
         holder.root.setOnClickListener {
             when {
-                sound_list == MainActivity.author_sound_list -> getIntent(ref = "AuthorSoundList", position)
-                else-> getIntent(ref = "MainSoundList", position)
+                sound_list == MainActivity.favorite_sound_list -> getIntent(ref = "FavoriteSoundList", position)
             }
 
         }

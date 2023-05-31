@@ -8,6 +8,7 @@
 
     <string name="menu_list_page">List</string>
     <string name="menu_author_page">Authors</string>
+    <string name="menu_collection_page">Collection</string>
     <string name="menu_favorite_page">Favorite</string>
 
     <string name="total_sound">"Total Songs: "</string>
@@ -27,5 +28,4 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search">Search</string>
-
 </resources>
