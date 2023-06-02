@@ -110,6 +110,32 @@ class DataSound(){
         if (MainActivity.isRepeat <2) MainActivity.isRepeat++
         else MainActivity.isRepeat = 0
     }
+
+    fun readSoundFavorite(context: Context): ArrayList<String> /* Чтение коллекции 'Избранное' в DataStorage */ {
+        val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE)
+        val tempArray = editor.getStringSet("FavoritesSound", null)
+        var data: ArrayList<String> = ArrayList()
+        tempArray!!.forEach(){data.add(it)}
+        return data
+    }
+    fun changeStatusSoundFavorite(context: Context) /* Изменение коллекции 'Избранное' в DataStorage */ {
+        val tempArray: ArrayList<String> = readSoundFavorite(context)
+        var tempId = MainActivity.initial_list.indexOf(MainActivity.sound_list[MainActivity.sound_position]).toString()
+
+        if (tempArray.contains(tempId)) {
+            tempArray.remove(tempId)
+
+            val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE).edit()
+            editor.putStringSet("FavoritesSound", tempArray.toSortedSet())
+            editor.apply()
+        } else {
+            tempArray.add(tempId)
+
+            val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE).edit()
+            editor.putStringSet("FavoritesSound", tempArray.toSortedSet())
+            editor.apply()
+        }
+    }
 }
 
 

@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:text="@string/sound_name"
+            android:textAlignment="center"
             android:textColor="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

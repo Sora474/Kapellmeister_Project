@@ -1,6 +1,7 @@
 package com.example.kapellmeister
 
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -24,6 +25,8 @@ import com.example.kapellmeister.Pages.NowPlaying
 import com.example.kapellmeister.Services.SoundService
 import com.example.kapellmeister.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -154,9 +157,11 @@ class MainActivity : AppCompatActivity(){
         } else if(!cursor.moveToFirst()){
             Toast.makeText(this,"Sound not found",Toast.LENGTH_SHORT)
         } else {
+            var tempCounter: Int = -1
             do {
                 //  Присвоение данных аудиофайла
-                val idC     = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
+               // val idC     = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
+                val idC     = tempCounter++.toString()
                 val nameC   = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
 
                 val authorC = if(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)) == "<unknown>")
