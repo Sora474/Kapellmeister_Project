@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthorList">
+    tools:context=".Collection">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -22,13 +22,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/author_name"
+                android:id="@+id/collection_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/ChapmanRed"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/author_name"
+                android:text="@string/collection_name"
                 android:textColor="@color/white"
                 android:textSize="34sp" />
 
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/total_author_sound"
+                android:text="@string/total_sound"
                 android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView

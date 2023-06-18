@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    style="@style/curved">
+    app:cardCornerRadius="15dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/ChapmanRed"
+    android:layout_margin="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +17,7 @@
         style="@style/curved">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/model_sound_img"
+            android:id="@+id/model_collection_list_img"
             android:layout_width="100dp"
             android:layout_height="80dp"
             android:contentDescription=" "
@@ -22,12 +25,15 @@
             app:shapeAppearanceOverlay="@style/curved" />
 
         <TextView
-            android:id="@+id/model_sound_name"
+            android:id="@+id/model_collection_list_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:text="@string/sound_name"
+            android:layout_gravity="center"
+            android:text="@string/collection_name"
             android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"/>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

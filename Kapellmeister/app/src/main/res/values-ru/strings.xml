@@ -11,11 +11,17 @@
     <string name="notification_reed_storage_true">"Получен доступ для чтения внутренней памяти "</string>
     <string name="error_unknown">Неизвестен</string>
     <string name="total_author">"Всего исполнителей: "</string>
-    <string name="total_author_sound">"Всего композиций исполнинителя: "</string>
-    <string name="exit_question">Вы уверены, что хотите выйти из приложения?</string>
+    <string name="total_author_sound">"Всего композиций исполнинителя:  "</string>
+    <string name="alert_dialog_exit_question">Вы уверены, что хотите выйти из приложения?</string>
     <string name="exit">Выход</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="search">Поиск</string>
     <string name="menu_collection_page">Коллекции</string>
+    <string name="total_collection">Всего коллекций:</string>
+    <string name="collection_name">Наименование коллекции</string>
+    <string name="alert_dialog_add_collection">Добавить коллекцию</string>
+    <string name="add">Добавить</string>
+    <string name="delete">Удалить</string>
+    <string name="notification_collection_already_exists">Коллекция с таким именем уже существует</string>
 </resources>

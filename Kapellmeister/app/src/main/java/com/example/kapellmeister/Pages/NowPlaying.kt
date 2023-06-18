@@ -33,7 +33,6 @@ class NowPlaying : Fragment(R.layout.fragment_now_playing) {
         }
         BindingClass.btnNext.setOnClickListener(){
             DataSound().moveSound(true, BindingClass.root.context)
-           // setLayout() // Необходимо перенести в DataSound
         }
         BindingClass.root.setOnClickListener(){
             val intent = Intent(requireContext(), PlayerActivity::class.java)

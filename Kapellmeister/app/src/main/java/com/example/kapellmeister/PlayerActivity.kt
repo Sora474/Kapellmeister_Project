@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kapellmeister.Adapters.SoundAdapter
+import com.example.kapellmeister.Datas.DataCollection
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.MainActivity.Companion.isPlaing
 import com.example.kapellmeister.MainActivity.Companion.sound_position
@@ -56,7 +57,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
             initializeBtnRepeat()
         }
         BindingClass.btnFavorite.setOnClickListener(){
-            DataSound().changeStatusSoundFavorite(BindingClass.root.context)
+            DataCollection().changeStatusSoundFavorite(BindingClass.root.context)
             initializeBtnFavorite()
         }
         BindingClass.btnDown.setOnClickListener(){
@@ -76,6 +77,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         setContentView(BindingClass.root)
         initializeBtnPlayPause()
         initializeBtnRepeat()
+        initializeBtnShuffle()
 
         var tempCheck = false                                                                       //
         if(sound_position == intent.getIntExtra("sound_index",0)) tempCheck = true  // Проверка на повторное нажатие
@@ -83,11 +85,11 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
 
         when(intent.getStringExtra("sound_class")){
             "NowPlaying" -> {
-                setLayout(this)
+                setLayout(BindingClass.root.context)
             }
             "MainSoundList" -> {
                 MainActivity.sound_list = MainActivity.initial_list
-                setLayout(this)
+                setLayout(BindingClass.root.context)
 
                     ////////////////////    For starting service
                     val intent = Intent(this, SoundService()::class.java)
@@ -96,7 +98,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
             }
             "AuthorSoundList" -> {
                 MainActivity.sound_list = MainActivity.author_sound_list
-                setLayout(this)
+                setLayout(BindingClass.root.context)
 
                     ////////////////////    For starting service
                     val intent = Intent(this, SoundService()::class.java)
@@ -106,11 +108,20 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
             "FavoriteSoundList" -> {
                 MainActivity.sound_list = MainActivity.initial_list
                 sound_position = MainActivity.initial_list.indexOf(MainActivity.favorite_sound_list[sound_position])
-                setLayout(this)
+                setLayout(BindingClass.root.context)
                     ////////////////////    For starting service
                     val intent = Intent(this, SoundService()::class.java)
                     bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
                     startService(intent)
+            }
+            "CollectionList" -> {
+                MainActivity.sound_list = MainActivity.initial_list
+                sound_position = MainActivity.initial_list.indexOf(MainActivity.collection_sound_list[sound_position])
+                setLayout(BindingClass.root.context)
+                ////////////////////    For starting service
+                val intent = Intent(this, SoundService()::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
+                startService(intent)
             }
         }
         initializeBtnFavorite()
@@ -121,14 +132,12 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         else BindingClass.btnPlayPause.setIconResource(R.drawable.ic_play)
     }
     fun initializeBtnFavorite() /* Инициализация отображения кнопки Favorite аудио файла плейера */ {
-        val tempArray: ArrayList<String> = DataSound().readSoundFavorite(BindingClass.root.context)
+        val tempArray: ArrayList<String> = DataCollection().readSoundCollection(BindingClass.root.context,"Favorite")
         var tempId = MainActivity.initial_list.indexOf(MainActivity.sound_list[MainActivity.sound_position]).toString()
 
         if (tempArray.contains(tempId)) BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
         else BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_false)
     }
-
-
     private fun initializeBtnRepeat() /* Инициализация отображения кнопки статуса активности повтора аудио файла плейера */ {
         when(MainActivity.isRepeat){
             0 -> {
@@ -164,6 +173,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         BindingClass.tvSongName.text      = MainActivity.sound_list[sound_position].name
         BindingClass.tvSongAuthor.text    = MainActivity.sound_list[sound_position].author
         BindingClass.tvSongTimeEnd.text   = DataSound().TimeFormat(MainActivity.sound_list[sound_position].time)
+
+        initializeBtnFavorite()
     }
     fun setSeekBarView(){
         runnable = Runnable {

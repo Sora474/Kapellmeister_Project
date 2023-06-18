@@ -62,18 +62,19 @@ class DataSound(){
         MainActivity.soundService?.showNotification()
     }
     fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {
+        val tempIsPlaing = MainActivity.isPlaing
        if (MainActivity.isShuffle && crement){
            MainActivity.sound_position = (0 until MainActivity.sound_list.size).random()
+           createMediaPlayer()
            PlayerActivity().setLayout(context)
-           NowPlaying().setLayout(context)
+           if(!tempIsPlaing) pauseSound()
        }else {
            if(crement){
                setCanMoveSound(true)
                PlayerActivity().setLayout(context)
-               NowPlaying().setLayout(context)
 
-               if (MainActivity.sound_position != 0) createMediaPlayer()
-               else{ if (MainActivity.isRepeat == 1) createMediaPlayer()
+               if (MainActivity.sound_position != 0) { createMediaPlayer(); if(!tempIsPlaing) pauseSound() }
+               else{ if (MainActivity.isRepeat == 1) { createMediaPlayer(); if(!tempIsPlaing) pauseSound() }
                      else{
                          createMediaPlayer()
                          pauseSound()
@@ -83,15 +84,15 @@ class DataSound(){
            else{
                setCanMoveSound(false)
                PlayerActivity().setLayout(context)
-               NowPlaying().setLayout(context)
 
-               if (MainActivity.sound_position != MainActivity.sound_list.size - 1) createMediaPlayer()
+               if (MainActivity.sound_position != MainActivity.sound_list.size - 1) { createMediaPlayer(); if(!tempIsPlaing) pauseSound() }
                else {
                    createMediaPlayer()
                    pauseSound()
                }
            }
        }
+        NowPlaying().setLayout(context)
     }
     fun setCanMoveSound(crement: Boolean) /* Определение возможности смещение аудио файла плейера */ {
         if(crement){
@@ -109,32 +110,6 @@ class DataSound(){
     fun changeStatusSoundRepeat() /* Изменение статуса активности повторного воспроизведения аудио файла плейера */ {
         if (MainActivity.isRepeat <2) MainActivity.isRepeat++
         else MainActivity.isRepeat = 0
-    }
-
-    fun readSoundFavorite(context: Context): ArrayList<String> /* Чтение коллекции 'Избранное' в DataStorage */ {
-        val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE)
-        val tempArray = editor.getStringSet("FavoritesSound", null)
-        var data: ArrayList<String> = ArrayList()
-        tempArray!!.forEach(){data.add(it)}
-        return data
-    }
-    fun changeStatusSoundFavorite(context: Context) /* Изменение коллекции 'Избранное' в DataStorage */ {
-        val tempArray: ArrayList<String> = readSoundFavorite(context)
-        var tempId = MainActivity.initial_list.indexOf(MainActivity.sound_list[MainActivity.sound_position]).toString()
-
-        if (tempArray.contains(tempId)) {
-            tempArray.remove(tempId)
-
-            val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE).edit()
-            editor.putStringSet("FavoritesSound", tempArray.toSortedSet())
-            editor.apply()
-        } else {
-            tempArray.add(tempId)
-
-            val editor = context.getSharedPreferences("FavoriteDataStorage", Context.MODE_PRIVATE).edit()
-            editor.putStringSet("FavoritesSound", tempArray.toSortedSet())
-            editor.apply()
-        }
     }
 }
 

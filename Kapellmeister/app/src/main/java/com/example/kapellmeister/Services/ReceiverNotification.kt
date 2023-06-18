@@ -22,7 +22,7 @@ class ReceiverNotification: BroadcastReceiver() {
                 MainActivity.soundService?.stopForeground(true)
                 MainActivity.soundService?.mediaPlayer?.release()
                 MainActivity.soundService = null
-                exitProcess(1)
+                exitProcess(0)
             }
         }
     }

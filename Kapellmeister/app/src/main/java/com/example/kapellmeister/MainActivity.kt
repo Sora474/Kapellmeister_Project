@@ -15,18 +15,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.Fragment
+import com.example.kapellmeister.Datas.DataCollection
 import com.example.kapellmeister.Datas.SoundModel
 import com.example.kapellmeister.Pages.AuthorPage
-import com.example.kapellmeister.Pages.CollectionPage
-import com.example.kapellmeister.Pages.FavoritePage
+import com.example.kapellmeister.Pages.CollectionListPage
 import com.example.kapellmeister.Pages.ListPage
-import com.example.kapellmeister.Pages.NowPlaying
 import com.example.kapellmeister.Services.SoundService
 import com.example.kapellmeister.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -37,6 +33,7 @@ class MainActivity : AppCompatActivity(){
         lateinit var initial_list: ArrayList<SoundModel>
         lateinit var author_sound_list: ArrayList<SoundModel>
         lateinit var favorite_sound_list: ArrayList<SoundModel>
+        lateinit var collection_sound_list: ArrayList<SoundModel>
         lateinit var sound_list: ArrayList<SoundModel>
         lateinit var search_sound_list: ArrayList<SoundModel>
         var sound_position: Int = -1
@@ -56,6 +53,7 @@ class MainActivity : AppCompatActivity(){
         sound_list = initial_list
         author_sound_list = ArrayList()
         favorite_sound_list = ArrayList()
+        collection_sound_list = ArrayList()
 
         ////////////////////    For left_menu
         BindingClass.nvGeneric.setNavigationItemSelectedListener{
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity(){
                     R.id.generic_left_menu_exit      -> {   // Обработчик выхода из приложения
                         val builder = MaterialAlertDialogBuilder(this)
                             builder.setTitle(getString(R.string.exit))
-                            .setMessage(getString(R.string.exit_question))
+                            .setMessage(getString(R.string.alert_dialog_exit_question))
                             .setPositiveButton(getString(R.string.yes)){ temp_atribut, _ ->
                                 if(soundService != null){
                                     soundService?.stopForeground(true)
@@ -100,12 +98,7 @@ class MainActivity : AppCompatActivity(){
                 }
                 R.id.generic_bottom_menu_collection_page -> {
                     supportFragmentManager
-                        .beginTransaction().replace(R.id.fl_generic, CollectionPage())
-                        .commit()
-                }
-                R.id.generic_bottom_menu_favorite_page -> {
-                    supportFragmentManager
-                        .beginTransaction().replace(R.id.fl_generic, FavoritePage())
+                        .beginTransaction().replace(R.id.fl_generic, CollectionListPage())
                         .commit()
                 }
             }
@@ -119,7 +112,8 @@ class MainActivity : AppCompatActivity(){
             soundService?.stopForeground(true)
             soundService?.mediaPlayer?.release()
             soundService = null
-            System.exit(0)
+           // System.exit(0)
+            exitProcess(0)
         }
     }
     private fun initializeLayout(){
@@ -202,7 +196,15 @@ class MainActivity : AppCompatActivity(){
             11 /* Чтение внутренних файлов */ -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, getString(R.string.notification_reed_storage_true), Toast.LENGTH_SHORT).show()
-                    // Перезапкск Activity
+
+                    //  Создание Collection
+                    val tempArray: ArrayList<String> = ArrayList()
+                    val editor = BindingClass.root.context.getSharedPreferences("CollectionMain", Context.MODE_PRIVATE).edit()
+                    editor.putStringSet("SoundMain", tempArray.toSortedSet())
+                    editor.apply()
+                    DataCollection().addSoundCollection(BindingClass.root.context,"Favorite", collection_sound_list)
+
+                    //  Перезапкск Activity
                     finish()
                     startActivity(intent)
                     overridePendingTransition(0,0)
