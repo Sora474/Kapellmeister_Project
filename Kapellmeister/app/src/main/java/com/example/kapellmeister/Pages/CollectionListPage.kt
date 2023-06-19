@@ -62,8 +62,10 @@ class CollectionListPage : Fragment() {
         var temp_list: ArrayList<String> = DataCollection().readSoundCollection(BindingClass.root.context,"Main")
         collection_list.clear()
         temp_list.forEach(){ collection_list.add(CollectionModel(it,
-            if(DataCollection().readSoundCollection(BindingClass.root.context,it).isNotEmpty())
-                MainActivity.initial_list[DataCollection().readSoundCollection(BindingClass.root.context,it)[0].toInt()].artUri
+            if(DataCollection().readSoundCollection(BindingClass.root.context,it).isNotEmpty()){
+                val tempId = DataCollection().readSoundCollection(BindingClass.root.context,it)[0]
+                MainActivity.initial_list.find { it.path == tempId}!!.artUri
+            }
             else getString(R.string.error_unknown)
         ))
         }
@@ -83,12 +85,11 @@ class CollectionListPage : Fragment() {
                         Toast.makeText(BindingClass.root.context,getString(R.string.notification_collection_already_exists),Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        var arra: ArrayList<SoundModel> = ArrayList()
-                        DataCollection().addSoundCollection(BindingClass.root.context, collection_name, arra)
+                        DataCollection().addSoundCollection(BindingClass.root.context, collection_name)
                         dialog.dismiss()
                         onResume()
                     }
-                }
+                }else Toast.makeText(BindingClass.root.context,getString(R.string.notification_collection_еmpty_name_is_not_allowed),Toast.LENGTH_SHORT).show()
             }
             .show()
     }

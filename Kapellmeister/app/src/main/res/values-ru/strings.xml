@@ -24,4 +24,6 @@
     <string name="add">Добавить</string>
     <string name="delete">Удалить</string>
     <string name="notification_collection_already_exists">Коллекция с таким именем уже существует</string>
+    <string name="favorite">Избранное</string>
+    <string name="notification_collection_еmpty_name_is_not_allowed">Пустое название не допустимо</string>
 </resources>

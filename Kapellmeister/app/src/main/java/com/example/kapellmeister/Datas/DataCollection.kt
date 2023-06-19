@@ -22,7 +22,7 @@ class DataCollection(){
 
     fun changeStatusSoundFavorite(context: Context) /* Изменение коллекции 'Избранное' в DataStorage */ {
         val tempArray: ArrayList<String> = readSoundCollection(context,"Favorite")
-        var tempId = MainActivity.initial_list.indexOf(MainActivity.sound_list[MainActivity.sound_position]).toString()
+        var tempId = MainActivity.sound_list[MainActivity.sound_position].path
 
         if (tempArray.contains(tempId)) {
             tempArray.remove(tempId)
@@ -39,10 +39,8 @@ class DataCollection(){
         }
     }
 
-    fun addSoundCollection(context: Context, name: String, collection: ArrayList<SoundModel>) /* Добавление коллекции в DataStorage */ {
+    fun addSoundCollection(context: Context, name: String) /* Добавление коллекции в DataStorage */ {
         val tempArray: ArrayList<String> = ArrayList()
-
-        collection.forEach(){ tempArray.add(MainActivity.initial_list.indexOf(it).toString()) }
 
         val editor = context.getSharedPreferences("Collection$name", Context.MODE_PRIVATE).edit()
         editor.putStringSet("Sound$name", tempArray.toSortedSet())

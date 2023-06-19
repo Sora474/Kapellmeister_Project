@@ -86,42 +86,34 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         when(intent.getStringExtra("sound_class")){
             "NowPlaying" -> {
                 setLayout(BindingClass.root.context)
+                startingService()
+
             }
             "MainSoundList" -> {
                 MainActivity.sound_list = MainActivity.initial_list
                 setLayout(BindingClass.root.context)
 
-                    ////////////////////    For starting service
-                    val intent = Intent(this, SoundService()::class.java)
-                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
-                    startService(intent)
+                startingService()
             }
             "AuthorSoundList" -> {
                 MainActivity.sound_list = MainActivity.author_sound_list
                 setLayout(BindingClass.root.context)
 
-                    ////////////////////    For starting service
-                    val intent = Intent(this, SoundService()::class.java)
-                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
-                    startService(intent)
+                startingService()
             }
             "FavoriteSoundList" -> {
                 MainActivity.sound_list = MainActivity.initial_list
                 sound_position = MainActivity.initial_list.indexOf(MainActivity.favorite_sound_list[sound_position])
                 setLayout(BindingClass.root.context)
-                    ////////////////////    For starting service
-                    val intent = Intent(this, SoundService()::class.java)
-                    bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
-                    startService(intent)
+
+                startingService()
             }
             "CollectionList" -> {
                 MainActivity.sound_list = MainActivity.initial_list
                 sound_position = MainActivity.initial_list.indexOf(MainActivity.collection_sound_list[sound_position])
                 setLayout(BindingClass.root.context)
-                ////////////////////    For starting service
-                val intent = Intent(this, SoundService()::class.java)
-                bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
-                startService(intent)
+
+                startingService()
             }
         }
         initializeBtnFavorite()
@@ -133,7 +125,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
     }
     fun initializeBtnFavorite() /* Инициализация отображения кнопки Favorite аудио файла плейера */ {
         val tempArray: ArrayList<String> = DataCollection().readSoundCollection(BindingClass.root.context,"Favorite")
-        var tempId = MainActivity.initial_list.indexOf(MainActivity.sound_list[MainActivity.sound_position]).toString()
+        var tempId = MainActivity.sound_list[MainActivity.sound_position].path
 
         if (tempArray.contains(tempId)) BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_true)
         else BindingClass.btnFavorite.setImageResource(R.drawable.ic_favorite_false)
@@ -187,10 +179,16 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         }
         Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
     }
+
+    fun startingService()/* Активация SoundService */{
+        val intent = Intent(this, SoundService()::class.java)
+        bindService(intent, this, BIND_AUTO_CREATE) //  Авторежим коннекта и дисконнекта
+        startService(intent)
+    }
     override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) /* Действия при активации SoundService */ {
         val binder = p1 as SoundService.MyBinder
         MainActivity.soundService = binder.currentService()
-        DataSound().createMediaPlayer()
+        if (intent.getStringExtra("sound_class") != "NowPlaying") DataSound().createMediaPlayer()
         DataSound().completedSound(this)
     }
     override fun onServiceDisconnected(p0: ComponentName?) /* Действия при прекращении работы SoundService */ {

@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity(){
                     val editor = BindingClass.root.context.getSharedPreferences("CollectionMain", Context.MODE_PRIVATE).edit()
                     editor.putStringSet("SoundMain", tempArray.toSortedSet())
                     editor.apply()
-                    DataCollection().addSoundCollection(BindingClass.root.context,"Favorite", collection_sound_list)
+                    DataCollection().addSoundCollection(BindingClass.root.context,"Favorite")
 
                     //  Перезапкск Activity
                     finish()

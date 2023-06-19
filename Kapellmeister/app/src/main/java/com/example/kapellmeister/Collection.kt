@@ -1,9 +1,11 @@
 package com.example.kapellmeister
 
+import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -14,6 +16,7 @@ import com.example.kapellmeister.Datas.DataCollection
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.databinding.ActivityCollectionBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.lang.Exception
 import kotlin.system.exitProcess
 
 
@@ -71,8 +74,12 @@ class Collection : AppCompatActivity() {
     private fun initializeLayout(){
         BindingClass = ActivityCollectionBinding.inflate(layoutInflater)
         setContentView(BindingClass.root)
-        if(intent.getStringExtra("collection_name") == "Favorite") BindingClass.collectionName.text = "Избранное"
-        else BindingClass.collectionName.text = intent.getStringExtra("collection_name")
+        if(intent.getStringExtra("collection_name") == "Favorite") {
+            BindingClass.collectionName.text = getString(R.string.favorite)
+            BindingClass.llBtn.visibility = View.GONE; BindingClass.btnDeleteCollection.visibility = View.GONE }
+        else {
+            BindingClass.collectionName.text = intent.getStringExtra("collection_name")
+            BindingClass.llBtn.visibility = View.VISIBLE; BindingClass.btnDeleteCollection.visibility = View.VISIBLE }
 
         ////////////////////    For left_menu
         toogle = ActionBarDrawerToggle(this, BindingClass.root , R.string.open, R.string.close)
@@ -96,6 +103,10 @@ class Collection : AppCompatActivity() {
     private fun getCollectionArray(name: String) /* Получение ПлейЛиста */ {
         var temp_list: ArrayList<String> = DataCollection().readSoundCollection(BindingClass.root.context,"$name")
         MainActivity.collection_sound_list.clear()
-        temp_list.forEach(){MainActivity.collection_sound_list.add(MainActivity.initial_list[it.toInt()])}
+        temp_list.forEach(){
+            val tempId = it
+            try{
+            MainActivity.collection_sound_list.add(MainActivity.initial_list.find {it.path == tempId }!!) } catch (e:Exception){}
+        }
     }
 }
