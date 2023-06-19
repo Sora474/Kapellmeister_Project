@@ -39,23 +39,51 @@ class DataCollection(){
         }
     }
 
-    fun addSoundCollection(context: Context, name: String) /* Добавление коллекции в DataStorage */ {
+    fun addCollection(context: Context, name: String) /* Добавление коллекции в DataStorage */ {
         val tempArray: ArrayList<String> = ArrayList()
 
         val editor = context.getSharedPreferences("Collection$name", Context.MODE_PRIVATE).edit()
         editor.putStringSet("Sound$name", tempArray.toSortedSet())
         editor.apply()
 
-        addInCollectionMain(context,name)
+        changeCollectionMain(context, name, true)
     }
+    fun deleteCollection(context: Context, name: String) /* Удаление коллекции в DataStorage */ {
+        val tempArray: ArrayList<String> = ArrayList()
 
-    private fun addInCollectionMain(context: Context, name: String) /* Добавление коллекции в CollectionMain в DataStorage */ {
+        val editor = context.getSharedPreferences("Collection$name", Context.MODE_PRIVATE).edit()
+        editor.putStringSet("Sound$name", tempArray.toSortedSet())
+        editor.apply()
+
+        changeCollectionMain(context, name, false)
+    }
+    private fun changeCollectionMain(context: Context, name: String, operation: Boolean) /* Добавление коллекции в CollectionMain в DataStorage */ {
         val tempArray: ArrayList<String> = readSoundCollection(context,"Main")
-        tempArray.add(name)
+
+        if(operation) tempArray.add(name)
+        else tempArray.remove(name)
 
         val editor = context.getSharedPreferences("CollectionMain", Context.MODE_PRIVATE).edit()
         editor.putStringSet("SoundMain", tempArray.toSortedSet())
         editor.apply()
+    }
+
+    fun changeSoundInCollection(context: Context, name: String, findArray:ArrayList<String>, operation: Boolean) /* Изменение коллекции 'Избранное' в DataStorage */ {
+        val tempArray: ArrayList<String> = readSoundCollection(context, name)
+
+        if (operation) {
+            findArray.forEach(){tempArray.add(it)}
+
+            val editor = context.getSharedPreferences("Collection$name", Context.MODE_PRIVATE).edit()
+            editor.putStringSet("Sound$name", tempArray.toSortedSet())
+            editor.apply()
+        } else {
+            findArray.forEach(){tempArray.remove(it)}
+
+            val editor = context.getSharedPreferences("Collection$name", Context.MODE_PRIVATE).edit()
+            editor.putStringSet("Sound$name", tempArray.toSortedSet())
+            editor.apply()
+        }
     }
 }
 

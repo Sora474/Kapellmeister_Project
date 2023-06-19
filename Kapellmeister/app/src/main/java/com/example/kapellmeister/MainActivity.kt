@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(){
         lateinit var collection_sound_list: ArrayList<SoundModel>
         lateinit var sound_list: ArrayList<SoundModel>
         lateinit var search_sound_list: ArrayList<SoundModel>
+        lateinit var select_sound_list: ArrayList<String>
         var sound_position: Int = -1
         var isPlaing      : Boolean = false
         var isShuffle     : Boolean = false
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(){
         author_sound_list = ArrayList()
         favorite_sound_list = ArrayList()
         collection_sound_list = ArrayList()
+        select_sound_list = ArrayList()
 
         ////////////////////    For left_menu
         BindingClass.nvGeneric.setNavigationItemSelectedListener{
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity(){
                             .setMessage(getString(R.string.alert_dialog_exit_question))
                             .setPositiveButton(getString(R.string.yes)){ temp_atribut, _ ->
                                 if(soundService != null){
+                                    soundService!!.audioManager.abandonAudioFocus(soundService)
                                     soundService?.stopForeground(true)
                                     soundService?.mediaPlayer?.release()
                                     soundService = null
@@ -109,6 +112,7 @@ class MainActivity : AppCompatActivity(){
     override fun onDestroy() {
         super.onDestroy()
         if(isPlaing && soundService != null){
+            soundService!!.audioManager.abandonAudioFocus(soundService)
             soundService?.stopForeground(true)
             soundService?.mediaPlayer?.release()
             soundService = null
@@ -202,7 +206,7 @@ class MainActivity : AppCompatActivity(){
                     val editor = BindingClass.root.context.getSharedPreferences("CollectionMain", Context.MODE_PRIVATE).edit()
                     editor.putStringSet("SoundMain", tempArray.toSortedSet())
                     editor.apply()
-                    DataCollection().addSoundCollection(BindingClass.root.context,"Favorite")
+                    DataCollection().addCollection(BindingClass.root.context,"Favorite")
 
                     //  Перезапкск Activity
                     finish()

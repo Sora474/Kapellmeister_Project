@@ -25,10 +25,16 @@
         android:theme="@style/Theme.Kapellmeister"
         tools:targetApi="31">
         <activity
+            android:name=".SelectionActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".Collection"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".AuthorList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".PlayerActivity"

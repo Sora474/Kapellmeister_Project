@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.media.AudioManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kapellmeister.Adapters.SoundAdapter
@@ -102,15 +104,15 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
                 startingService()
             }
             "FavoriteSoundList" -> {
-                MainActivity.sound_list = MainActivity.initial_list
-                sound_position = MainActivity.initial_list.indexOf(MainActivity.favorite_sound_list[sound_position])
+                MainActivity.sound_list = MainActivity.favorite_sound_list
+               // sound_position = MainActivity.initial_list.indexOf(MainActivity.favorite_sound_list[sound_position])
                 setLayout(BindingClass.root.context)
 
                 startingService()
             }
             "CollectionList" -> {
-                MainActivity.sound_list = MainActivity.initial_list
-                sound_position = MainActivity.initial_list.indexOf(MainActivity.collection_sound_list[sound_position])
+                MainActivity.sound_list = MainActivity.collection_sound_list
+               // sound_position = MainActivity.initial_list.indexOf(MainActivity.collection_sound_list[sound_position])
                 setLayout(BindingClass.root.context)
 
                 startingService()
@@ -190,6 +192,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection{
         MainActivity.soundService = binder.currentService()
         if (intent.getStringExtra("sound_class") != "NowPlaying") DataSound().createMediaPlayer()
         DataSound().completedSound(this)
+        MainActivity.soundService!!.audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        MainActivity.soundService!!.audioManager.requestAudioFocus( MainActivity.soundService, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
     }
     override fun onServiceDisconnected(p0: ComponentName?) /* Действия при прекращении работы SoundService */ {
         MainActivity.soundService = null

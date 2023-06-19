@@ -46,7 +46,7 @@ class CollectionListPage : Fragment() {
         collectionAdapter = CollectionListAdapter(BindingClass.root.context, collection_list)
         BindingClass.rvList.adapter = collectionAdapter
 
-        BindingClass.tvTotalSound.text =  getString(R.string.total_sound) + collection_list.size.toString()
+        BindingClass.tvTotalSound.text =  getString(R.string.total_collection) + collection_list.size.toString()
 
         return BindingClass.root
     }
@@ -55,7 +55,7 @@ class CollectionListPage : Fragment() {
         super.onResume()
         getCollectionArray()
         BindingClass.rvList.adapter = collectionAdapter
-        BindingClass.tvTotalSound.text =  getString(R.string.total_sound) + DataSound().getSizeSoundList(MainActivity.favorite_sound_list).toString()
+        BindingClass.tvTotalSound.text =  getString(R.string.total_collection) + collection_list.size.toString()
     }
 
     private fun getCollectionArray() /* Получение ПлейЛиста */ {
@@ -85,7 +85,7 @@ class CollectionListPage : Fragment() {
                         Toast.makeText(BindingClass.root.context,getString(R.string.notification_collection_already_exists),Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        DataCollection().addSoundCollection(BindingClass.root.context, collection_name)
+                        DataCollection().addCollection(BindingClass.root.context, collection_name)
                         dialog.dismiss()
                         onResume()
                     }

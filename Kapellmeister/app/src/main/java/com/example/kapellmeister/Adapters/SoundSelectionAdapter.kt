@@ -14,9 +14,10 @@ import com.example.kapellmeister.Holders.SoundHolder
 import com.example.kapellmeister.MainActivity
 import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
+import com.example.kapellmeister.SelectionActivity
 import com.example.kapellmeister.databinding.VModelSongUnitBinding
 
-class SoundAdapter(private val context: Context, private val sound_list: ArrayList<SoundModel>): RecyclerView.Adapter<SoundHolder>() {
+class SoundSelectionAdapter(private val context: Context, private val sound_list: ArrayList<SoundModel>): RecyclerView.Adapter<SoundHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundHolder {
         return SoundHolder(VModelSongUnitBinding.inflate(LayoutInflater.from(context), parent, false))
     }
@@ -31,14 +32,10 @@ class SoundAdapter(private val context: Context, private val sound_list: ArrayLi
             .apply(RequestOptions.placeholderOf(R.drawable.ic_treble_clef_black).centerCrop())
             .into(holder.img)
 
-        //  Передача context
+        //  Преобразование списка
         holder.root.setOnClickListener {
-            when {
-                sound_list == MainActivity.author_sound_list     -> getIntent(ref = "AuthorSoundList", position)
-                sound_list == MainActivity.favorite_sound_list   -> getIntent(ref = "FavoriteSoundList", position)
-                sound_list == MainActivity.collection_sound_list -> getIntent(ref = "CollectionList", position)
-                else-> getIntent(ref = "MainSoundList", position)
-            }
+            if(MainActivity.select_sound_list.contains(sound_list[position].path)) { MainActivity.select_sound_list.remove(sound_list[position].path); holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.white)) }
+            else { MainActivity.select_sound_list.add(sound_list[position].path); holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.ChapmanRed)) }
         }
     }
 

@@ -28,6 +28,7 @@
 
     <string name="alert_dialog_add_collection">Add collection</string>
     <string name="alert_dialog_exit_question">Are you sure you want to exit the app?</string>
+    <string name="alert_dialog_del_collection">Are you sure you want to delete the collection?</string>
 
     <string name="error_unknown">Unknown</string>
     <string name="exit">Exit</string>
@@ -37,6 +38,7 @@
     <string name="delete">Delete</string>
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
+    <string name="selection_sound">Selection sounds</string>
 
 
 </resources>

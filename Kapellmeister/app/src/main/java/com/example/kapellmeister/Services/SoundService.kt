@@ -4,18 +4,22 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.example.kapellmeister.Datas.DataSound
 import com.example.kapellmeister.MainActivity
+import com.example.kapellmeister.PlayerActivity
 import com.example.kapellmeister.R
 
-class SoundService : Service() {
+class SoundService : Service(), AudioManager.OnAudioFocusChangeListener {
     private var myBinder = MyBinder()
     private lateinit var mediaSession: MediaSessionCompat
+    lateinit var audioManager: AudioManager
     var mediaPlayer: MediaPlayer? = null
 
     override fun onBind(intent: Intent): IBinder {
@@ -30,6 +34,11 @@ class SoundService : Service() {
     }
 
     fun showNotification(){
+        val intent = Intent(baseContext,PlayerActivity::class.java)
+        intent.putExtra("sound_index", MainActivity.sound_position)
+        intent.putExtra("sound_class", "NowPlaying")
+        val contextIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+
         val playPauseIntent = Intent(this, ReceiverNotification::class.java).setAction(ApplicationClass.PLAYPAUSE)           // Binding старта/паузы аудио файла плейера
         val playPausePendingIntent = PendingIntent.getBroadcast(this, 0, playPauseIntent, PendingIntent.FLAG_IMMUTABLE) //  в Notification
 
@@ -45,6 +54,7 @@ class SoundService : Service() {
         val imgArt = DataSound().getImageArt(MainActivity.sound_list[MainActivity.sound_position].path)
 
         val notification = NotificationCompat.Builder(this, ApplicationClass.CHANNEL_ID.toString())
+            .setContentIntent(contextIntent)
             .setContentTitle(MainActivity.sound_list[MainActivity.sound_position].name)
             .setContentText(MainActivity.sound_list[MainActivity.sound_position].author)
             .setSmallIcon(R.drawable.ic_treble_clef_black)
@@ -66,5 +76,10 @@ class SoundService : Service() {
             .build()
 
         startForeground(13, notification)
+    }
+
+    override fun onAudioFocusChange(p0: Int) /* Контроль параллельных звуков */ {
+        if(p0 <= 0) DataSound().pauseSound()
+        else DataSound().playSound()
     }
 }

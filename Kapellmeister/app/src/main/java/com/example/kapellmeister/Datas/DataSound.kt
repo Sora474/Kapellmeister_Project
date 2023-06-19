@@ -59,6 +59,7 @@ class DataSound(){
     private fun changePlauPauseSound() /* Связанные действия Запуска/Останови плейера */ {
         PlayerActivity().initializeBtnPlayPause()
         NowPlaying().initializeBtnPlayPause()
+        NowPlaying().onResume()
         MainActivity.soundService?.showNotification()
     }
     fun moveSound(crement: Boolean, context: Context) /* Смещение аудио файла плейера */ {

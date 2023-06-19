@@ -48,6 +48,7 @@ class AuthorList : AppCompatActivity() {
                         .setMessage(getString(R.string.alert_dialog_exit_question))
                         .setPositiveButton(getString(R.string.yes)){ temp_atribut, _ ->
                             if(MainActivity.soundService != null){
+                                MainActivity.soundService!!.audioManager.abandonAudioFocus(MainActivity.soundService)
                                 MainActivity.soundService?.stopForeground(true)
                                 MainActivity.soundService?.mediaPlayer?.release()
                                 MainActivity.soundService = null
